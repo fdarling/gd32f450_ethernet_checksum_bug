@@ -1,3 +1,5 @@
 .settings
 /GD32F450 Debug/
 /GD32F107 Debug/
+/GD32F107 Workaround Debug/
+/GD32F450 Workaround Debug/

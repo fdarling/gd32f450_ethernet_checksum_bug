@@ -39,6 +39,11 @@ OF SUCH DAMAGE.
 
 #ifdef GD32F10X_CL
 
+#ifdef ACCEPT_BAD_ETHERNET_FRAMES_HACK
+#undef ENET_RDES0_ERRS
+#define ENET_RDES0_ERRS ((uint32_t)0)
+#endif // ACCEPT_BAD_ETHERNET_FRAMES_HACK
+
 #if defined   (__CC_ARM)                                    /*!< ARM compiler */
 __align(4) 
 enet_descriptors_struct  rxdesc_tab[ENET_RXBUF_NUM];        /*!< ENET RxDMA descriptor */
