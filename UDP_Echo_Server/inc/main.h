@@ -38,14 +38,22 @@ OF SUCH DAMAGE.
 #ifndef MAIN_H
 #define MAIN_H
 
+#ifdef GD32F450
 #include "gd32f4xx.h"
-#include "stdint.h"
 #include "gd32f4xx_enet_eval.h"
+#endif // F450
+#ifdef GD32F10X_CL
+#include "gd32f10x.h"
+#include "gd32f10x_enet_eval.h"
+#endif // GD32F10x_CL
 
-//#define USE_DHCP       1 /* enable DHCP, if disabled static address is used */
+#include <stdint.h>
+
+//#define USE_DHCP       /* enable DHCP, if disabled static address is used */
 
 #define USE_ENET_INTERRUPT
 //#define TIMEOUT_CHECK_USE_LWIP
+
 /* MAC address: MAC_ADDR0:MAC_ADDR1:MAC_ADDR2:MAC_ADDR3:MAC_ADDR4:MAC_ADDR5 */
 #define MAC_ADDR0   2
 #define MAC_ADDR1   0xA

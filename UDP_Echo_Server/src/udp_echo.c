@@ -39,7 +39,12 @@ OF SUCH DAMAGE.
 #include "lwip/udp.h"
 #include <string.h>
 #include <stdio.h>
+#ifdef GD32F450
 #include "gd32f4xx.h"
+#endif
+#ifdef GD32F10X_CL
+#include "gd32f10x.h"
+#endif
 
 static struct udp_pcb *udppcb;
 

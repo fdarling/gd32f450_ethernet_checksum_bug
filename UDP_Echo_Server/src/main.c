@@ -35,18 +35,28 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 OF SUCH DAMAGE.
 */
 
+#ifdef GD32F450
 #include "gd32f4xx.h"
+#endif // GD32F450
+#ifdef GD32F10x_CL
+#include "gd32f10x.h"
+#endif // GD32F10x_CL
 #include "netconf.h"
 #include "main.h"
 #include "lwip/tcp.h"
 #include "lwip/timeouts.h"
+#ifdef GD32F450
 #include "gd32f450i_eval.h"
+#endif // GD32F450
+#ifdef GD32F10X_CL
+#include "gd32f10x_eval.h"
+#include "gd32f10x_enet_eval.h"
+#endif // GD32F10x_CL
 #include "udp_echo.h"
-
 
 #define SYSTEMTICK_PERIOD_MS  10
 
-__IO uint32_t g_localtime = 0; /* for creating a time reference incremented by 10ms */
+volatile uint32_t g_localtime = 0; /* for creating a time reference incremented by 10ms */
 uint32_t g_timedelay;
 
 /*!
@@ -58,7 +68,9 @@ uint32_t g_timedelay;
 int main(void)
 {
     gd_eval_com_init(EVAL_COM0);
+#ifdef GD32F450
     gd_eval_key_init(KEY_TAMPER, KEY_MODE_EXTI);
+#endif // GD32F450
     /* setup ethernet system(GPIOs, clocks, MAC, DMA, systick) */
     enet_system_setup();
 
@@ -138,6 +150,6 @@ void time_update(void)
 int fputc(int ch, FILE *f)
 {
     usart_data_transmit(EVAL_COM0, (uint8_t) ch);
-    while(RESET == usart_flag_get(EVAL_COM0, USART_FLAG_TBE));
+    while(!usart_flag_get(EVAL_COM0, USART_FLAG_TBE));
     return ch;
 }

@@ -1,15 +1,15 @@
 /*!
-    \file    netconf.h
-    \brief   the header file of netconf 
-    
-    \version 2016-08-15, V1.0.0, firmware for GD32F4xx
-    \version 2018-12-12, V2.0.0, firmware for GD32F4xx
-    \version 2020-09-30, V2.1.0, firmware for GD32F4xx
-    \version 2022-03-09, V3.0.0, firmware for GD32F4xx
+    \file    gd32f10x_enet_eval.h
+    \brief   the header file of gd32f20x_enet_eval 
+
+    \version 2014-12-26, V1.0.0, firmware for GD32F10x
+    \version 2017-06-20, V2.0.0, firmware for GD32F10x
+    \version 2018-07-31, V2.1.0, firmware for GD32F10x
+    \version 2020-09-30, V2.2.0, firmware for GD32F10x
 */
 
 /*
-    Copyright (c) 2022, GigaDevice Semiconductor Inc.
+    Copyright (c) 2020, GigaDevice Semiconductor Inc.
 
     Redistribution and use in source and binary forms, with or without modification, 
 are permitted provided that the following conditions are met:
@@ -35,17 +35,13 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 OF SUCH DAMAGE.
 */
 
-#ifndef NETCONF_H
-#define NETCONF_H
+#ifndef GD32F10x_ENET_EVAL_H
+#define GD32F10x_ENET_EVAL_H
 
-#include "main.h"
+#include "lwip/netif.h"
 
-#ifdef USE_DHCP
-void lwip_dhcp_process_handle(void);
-#endif /* USE_DHCP */
+/* function declarations */
+/* setup ethernet system(GPIOs, clocks, MAC, DMA, systick) */
+void  enet_system_setup(void);
 
-void lwip_stack_init(void);
-void lwip_pkt_handle(void);
-void lwip_periodic_handle(uint32_t localtime);
-
-#endif /* NETCONF_H */
+#endif /* GD32F10x_ENET_EVAL_H */

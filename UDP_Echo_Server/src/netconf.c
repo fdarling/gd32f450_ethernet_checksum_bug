@@ -46,8 +46,8 @@ OF SUCH DAMAGE.
 #include "main.h"
 #include "netconf.h"
 #include <stdio.h>
-#include "lwip/priv/tcp_priv.h"
 #include "lwip/timeouts.h"
+#include "lwip/priv/tcp_priv.h"
 
 #define MAX_DHCP_TRIES        4
 
@@ -69,7 +69,9 @@ uint32_t tcp_timer = 0;
 uint32_t arp_timer = 0;
 ip_addr_t ip_address = {0};
 
+#ifdef USE_DHCP
 void lwip_dhcp_process_handle(void);
+#endif // USE_DHCP
 void lwip_netif_status_callback(struct netif *netif);
 
 /*!
@@ -147,7 +149,7 @@ void lwip_pkt_handle(void)
     \param[out] none
     \retval     none
 */
-void lwip_periodic_handle(__IO uint32_t localtime)
+void lwip_periodic_handle(uint32_t localtime)
 {
 #if LWIP_TCP
     /* TCP periodic process every 250 ms */
